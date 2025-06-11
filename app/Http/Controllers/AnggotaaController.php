@@ -8,6 +8,6 @@ class AnggotaaController extends Controller
 {
     public function index()
     {
-        return view('\anggotaa\dashboard');
+        return view('anggotaa.dashboard');
     }
 }
