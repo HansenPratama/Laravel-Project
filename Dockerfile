@@ -6,8 +6,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libsqlite3-dev \
     libzip-dev \
+    libpng-dev \  # <-- penting untuk ekstensi gd
     zip \
-    && docker-php-ext-install pdo pdo_sqlite
+    && docker-php-ext-install pdo pdo_sqlite zip gd
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
@@ -23,8 +24,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+RUN chmod -R 775 storage bootstrap/cache database \
+    && chown -R www-data:www-data .
 
 # Expose port
 EXPOSE 80
