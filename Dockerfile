@@ -1,12 +1,11 @@
 FROM php:8.2-apache
 
-# Install dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
     libsqlite3-dev \
     libzip-dev \
-    libpng-dev \  # <-- penting untuk ekstensi gd
+    libpng-dev \
     zip \
     && docker-php-ext-install pdo pdo_sqlite zip gd
 
