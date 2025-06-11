@@ -2,6 +2,7 @@
 FROM php:8.2-apache
 
 # Install dependencies sistem dan ekstensi PHP
+# Install dependencies sistem dan PHP extension
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -9,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
     sqlite3 \
+    libsqlite3-dev \
     && docker-php-ext-install pdo pdo_sqlite zip gd
 
 # Aktifkan modul rewrite Apache
